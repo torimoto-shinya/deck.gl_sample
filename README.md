@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Pre Settings
+
+Replace Your API Key for Google Maps JavaScript API.
+
+https://github.com/torimoto-shinya/deck.gl_sample/blob/47c168108704c8836b4db15cd2e94b00527c79cc/src/components/hoc/GoogleMapsHOC.tsx#L13
+
 ## Available Scripts
 
 In the project directory, you can run:
