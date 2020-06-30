@@ -12,10 +12,7 @@ interface MapAreaProps {
 
 interface MapAreaState {}
 
-class MapArea extends React.Component<
-	MapAreaProps & GoogleMapsProps & DispatchProp,
-	MapAreaState
-> {
+class MapArea extends React.Component<MapAreaProps & GoogleMapsProps & DispatchProp, MapAreaState> {
 	ref: HTMLDivElement | null = null;
 	debounceTimeoutId = -1;
 
@@ -31,7 +28,7 @@ class MapArea extends React.Component<
 		const { lat, lng, zoom } = this.props;
 
 		this.props.map.setCenter({ lat, lng });
-		this.props.map.setZoom(zoom);		
+		this.props.map.setZoom(zoom);
 	}
 
 	debounce = (timeout: number, callback: () => void) => {
@@ -71,7 +68,7 @@ class MapArea extends React.Component<
 						width: '100%',
 						height: '100%',
 					}}
-					ref={ref => (this.ref = ref)}
+					ref={(ref) => (this.ref = ref)}
 				/>
 				{this.props.children}
 			</>

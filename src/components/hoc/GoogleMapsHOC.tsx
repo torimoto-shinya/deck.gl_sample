@@ -86,7 +86,7 @@ class GoogleMap {
 	addEventListenerToContainerElement<K extends keyof HTMLElementEventMap>(
 		type: K,
 		listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
-		options?: boolean | AddEventListenerOptions,
+		options?: boolean | AddEventListenerOptions
 	) {
 		if (!this._map) {
 			this._createMap();
@@ -97,7 +97,7 @@ class GoogleMap {
 	removeEventListenerFromContainerElement<K extends keyof HTMLElementEventMap>(
 		type: K,
 		listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
-		options?: boolean | EventListenerOptions,
+		options?: boolean | EventListenerOptions
 	) {
 		if (!this._map) {
 			this._createMap();
@@ -151,44 +151,37 @@ class GoogleMap {
 let mapSingleton: GoogleMap | null = null;
 
 export function googleMapsHOC<OriginalProps extends {}>(
-	WrappedComponent: React.ComponentType<OriginalProps & GoogleMapsProps>,
+	WrappedComponent: React.ComponentType<OriginalProps & GoogleMapsProps>
 ) {
 	type ResultProps = OriginalProps & GoogleMapsHOCProps;
 	return class GoogleMapsHOC extends React.Component<ResultProps, GoogleMapsHOCState> {
 		public state: GoogleMapsHOCState = { map: null };
 
 		public componentDidMount() {
-			getMap().then(map => this.setState({ map }));
+			getMap().then((map) => this.setState({ map }));
 		}
 
 		public render() {
-			return this.state.map ? (
-				<WrappedComponent {...this.props} map={this.state.map} />
-			) : null;
+			return this.state.map ? <WrappedComponent {...this.props} map={this.state.map} /> : null;
 		}
 	};
 }
 
 export function googleMapsHOCWithRef<OriginalProps extends {}>(
-	WrappedComponent: React.ComponentClass<OriginalProps & GoogleMapsProps>,
+	WrappedComponent: React.ComponentClass<OriginalProps & GoogleMapsProps>
 ) {
 	type WrappedComponentInstanceType = InstanceType<typeof WrappedComponent>;
-	type ResultProps = OriginalProps &
-		GoogleMapsHOCProps & { forwardedRef: React.Ref<WrappedComponentInstanceType> };
+	type ResultProps = OriginalProps & GoogleMapsHOCProps & { forwardedRef: React.Ref<WrappedComponentInstanceType> };
 	class GoogleMapsHOC extends React.Component<ResultProps, GoogleMapsHOCState> {
 		public state: GoogleMapsHOCState = { map: null };
 
 		public componentDidMount() {
-			getMap().then(map => this.setState({ map }));
+			getMap().then((map) => this.setState({ map }));
 		}
 
 		public render() {
 			return this.state.map ? (
-				<WrappedComponent
-					{...this.props as OriginalProps}
-					map={this.state.map}
-					ref={this.props.forwardedRef}
-				/>
+				<WrappedComponent {...(this.props as OriginalProps)} map={this.state.map} ref={this.props.forwardedRef} />
 			) : null;
 		}
 	}
@@ -222,5 +215,5 @@ async function getMap() {
 }
 
 function wait(time: number) {
-	return new Promise<void>(r => setTimeout(() => r(), time));
+	return new Promise<void>((r) => setTimeout(() => r(), time));
 }
